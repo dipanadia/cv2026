@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Diri - Neo Brutalist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Mengatur font dan warna dasar */
+        :root {
+            --primary-color: #d454d8; /* Ungu */
+            --secondary-color: #0c99eb; /* Biru */
+            --background-color: #f5f5f5; /* Abu-abu terang */
+            --accent-color: #03a9f4; /* Biru cerah */
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 800px;
+            width: 90%;
+            margin: 40px auto;
+            border: 5px solid var(--secondary-color);
+            box-shadow: 10px 10px 0 var(--accent-color);
+            background-color: rgb(0, 0, 0);
+            padding: 30px;
+        }
+
+        /* Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .photo-container {
+            border: 3px solid var(--secondary-color);
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            margin-right: 30px;
+            position: relative;
+            background-color: var(--primary-color);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            mix-blend-mode: multiply; /* Efek warna neo-brutalism */
+            transition: transform 0.3s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.1);
+        }
+
+        .header-text h1 {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header-text p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+            color: var(--secondary-color);
+        }
+
+        /* Bagian Konten */
+        h2 {
+            font-size: 1.5em;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            display: inline-block;
+            border: 2px solid var(--secondary-color);
+            transform: skew(-10deg);
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        /* Biodata */
+        .biodata-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-item {
+            border: 2px solid var(--secondary-color);
+            padding: 10px;
+            background-color: var(--background-color);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .info-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .info-item .label {
+            display: block;
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 0.9em;
+        }
+        .info-item:hover .label {
+            color: white;
+        }
+
+        .info-item .value {
+            display: block;
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+
+        /* Hobi */
+        .hobbies-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hobby-item {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: 2px solid var(--secondary-color);
+            transform: rotate(-3deg);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hobby-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 5px 5px 0 var(--accent-color);
+        }
+
+        /* Sosial Media */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            color: white;
+            background-color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 0 var(--accent-color);
+        }
+
+        .social-link:hover::before {
+            transform: scale(1);
+            transform-origin: center;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover i {
+            color: white;
+        }
+
+        /* Warna spesifik saat di-hover */
+        .social-link[title="Instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc274c, #cc2366, #bc1888);
+            box-shadow: 5px 5px 0 #cc2366;
+        }
+
+        .social-link[title="TikTok"]:hover {
+            background-color: #000;
+            box-shadow: 5px 5px 0 #69c9d0;
+        }
+
+        .social-link[title="Facebook"]:hover {
+            background-color: #3b5998;
+            box-shadow: 5px 5px 0 #3b5998;
+        }
+
+        .social-link[title="Twitter"]:hover {
+            background-color: #00acee;
+            box-shadow: 5px 5px 0 #00acee;
+        }
+
+        /* Pencapaian */
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-item {
+            border: 3px solid var(--secondary-color);
+            padding: 15px;
+            background-color: var(--background-color);
+            box-shadow: 5px 5px 0 var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 0 var(--accent-color);
+        }
+
+        .achievement-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .achievement-item .achievement-title {
+            display: block;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .achievement-item .achievement-date {
+            display: block;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 5px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .achievement-item:hover .achievement-title,
+        .achievement-item:hover .achievement-date {
+            color: #fff;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .photo-container {
+                margin: 0 0 20px 0;
+            }
+            .biodata-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body bgcolor="black">
+    <div class="main-container">
+        <header class="profile-header">
+            <div class="photo-container">
+                <img src="dipa.jpg" alt="Foto Profil" class="profile-photo">
+            </div>
+            <div class="header-text">
+                <h1>Diva Nadiatu Shefira</h1>
+                <p>sekolah | SMA GUNUNG MADU</p>
+            </div>
+        </header>
+
+        <section class="section-biodata">
+            <h2>BIODATA DIVA IMUT </h2>
+            <div class="biodata-grid">
+                <div class="info-item">
+                    <span class="label">Nama</span>
+                    <span class="value">Diva Nadiatu Shefira</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Tempat Lahir</span>
+                    <span class="value">Mulya Asri</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Tanggal Lahir</span>
+                    <span class="value">2 Januari 2008</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Umur</span>
+                    <span class="value">17 Tahun</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-about">
+            <h2>TENTANG DIVA CANTIK</h2>
+            <p>
+              Nama saya diva nadiatu shefira saya berasal dari mulya asri tulang bawang barat dan saya anak ke 2 dari  3 bersodara. saya sekolah sd di tunas asri tahun 2014-2020 lanjut ke smp tbb tahun 2020-2023 dan saat ini saya sekolah di SMA gunung madu dari 2023 sampai dengan 2026.  Saya adalah seorang pelajar yang penuh rasa ingin tahu dan selalu bersemangat untuk mencari hal-hal baru terutama di bidang makeup, fashion, dan kuliner. Dengan senang hati, saya terus mengembangkan kemampuan untuk mencari dan menciptakan ide-ide kreatif,saya mempunyai cita cita yaitu menjadi owner skincare tetapi saya rasa mempunyai bakat di make up.
+            </p>
+        </section>
+
+        <section class="section-hobbies">
+            <h2>HOBI INCES DIVA</h2>
+            <div class="hobbies-list">
+                <div class="hobby-item">Make Up</div>
+                <div class="hobby-item">Scroll TikTok</div>
+                <div class="hobby-item">kuliner seblak</div>
+            </div>
+        </section
+
+        <section class="section-social">
+            <h2>SOSIAL MEDIA DIVA 👸</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/nadiashefira?igsh=MXY0bTJyd2huMmZtdw==" class="social-link" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1-8SrOJEntdYRl4riPXTMXGDKCbTUd7Nh" class="social-link" target="_blank" title="Google Drive">
+            <i class="fab fa-google-drive"></i>
+        </a>
+                </a>
+               
+                </a>
+            </div>
+        </section>
+
+        <section class="section-achievements">
+            <h2>PENCAPAIAN 👑</h2>
+            <div class="achievements-list">
+                <div class="achievement-item">
+                    <span class="achievement-title">Juara 1 Lomba menari saat smp umtuk menyambut bupati</span>
+                    <span class="achievement-date">Tahun 2022</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-title">ranking 2 saat kelas 1 sd,semester 1,ranking 3 semester 2,ranking 2 kelas 2 semester 1,ranking 1 kelas 2 semester 2</span>
+                    <span class="achievement-date">Tahun 2014-2015</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-title">juara 2 membaca puisi kelas 6 sd</span>
+                    <span class="achievement-date">2020</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
